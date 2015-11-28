@@ -57,4 +57,5 @@ TpWord *novaWord(); // nova palavra, que pertence a ListaWord que esta dentro da
 TpLista *novaLista(); // cria lista das folhas encadeadas
 TpTree *novaArv(); // cria uma nova B+ tree
 
-void imprimePaginas(TpTree *arv);
+void imprimeArvore(TpPagina *raiz);
+void imprimePaginas(TpTree *arv, TpPagina *folhaE);

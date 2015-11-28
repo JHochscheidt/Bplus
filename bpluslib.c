@@ -1,80 +1,5 @@
 #include "bpluslib.h"
 
-
-/*
-TpPagina *insere(TpTree *tree, TpPagina *root, char *str){
-	//if(root == NULL) return;
-	
-	TpPagina *auxr = tree->raiz;
-	TpPagina *aux = root;
-	int i;
-	
-	if(strcmp(str, aux->reg[0]) < 0){ //str < aux, descendo à esuqerda
-		
-		insere(auxr, aux->filhos[0], str);
-	
-	}else if(strcmp(str, aux->reg[aux->nItens - 1]) > 0){//str < aux, descendo à direita
-		
-		insere(auxr, aux->filhos[aux->nItens], str);
-		
-	}else if(strcmp(str, aux->reg[0]) > 0 && strcmp(str, aux->reg[aux->nItens - 1]) < 0){ //pertence a esse nodo
-		if(folha){//é folha? senao, chamar folha //correr vetor e inserir 
-			
-			//precisa split? se sim,
-			
-			
-			if(aux->nItens < MM){// não precisa de split
-				//escrever primeiro o caso de não precisa de split
-			}else{ // precisa de split   (verificar em algum lugar se o pai precisa de split
-				if(){// da pra jogar pro irmao?
-				
-				//joga pro irmao
-				
-				}else{
-				
-					//splita e joga pro pai, confere se o pai suporta ou precisa de split tb(verificar se o pai pode jogar pro seu irmao
-				}
-			}
-			
-			
-			
-			
-		}else{//chamar folha
-		
-			for(i=0;i < aux->nItens;i++){//talvez um busca binaria antes de entrar nesse laço
-				if(strcmp(str, aux->reg[i]) > 0 && strcmp(str, aux->reg[i+1 */ /*verificar se isso n da seg. faulth*/ /*]) < 0)){
-					insere(auxr, aux->filhos[i???], str);
-				}	
-			}
-		}		
-	}	
-	*/	
-		/*	
-	if(auxr == NULL){//ARVORE VAZIA
-		auxr = novaPag();
-		auxr->nItens++;
-		strcpy(auxr->reg[0], str);
-		return auxr;
-	}else if(auxr == aux){//nodo passado é raiz
-		if(aux->nItens < M){// há espaço para inserir na raiz
-			
-			aux->nItens++;
-		}else{//split, verificar se ouve overflow na folha
-			
-		
-		}
-	
-	}
-	*//*
-	
-	
-		
-	
-	return aux;
-}
-*/
-
-
 TpPagina *insereWord(TpTree *arv, TpPagina *raiz, char *word, int ordemArvore){
 	//puts("INS");
 	//arvore vazia
@@ -251,6 +176,8 @@ TpPagina *insereWord(TpTree *arv, TpPagina *raiz, char *word, int ordemArvore){
 }
 
 void split(TpTree *arv, TpPagina *pagSplitar, int ordemArvore){
+	int folha = pagSplitar->folha;
+	
 	int pos = 0;
 	TpWord *wSplit = pagSplitar->palavras->first;
 	while(pos < ordemArvore){
@@ -266,10 +193,14 @@ void split(TpTree *arv, TpPagina *pagSplitar, int ordemArvore){
 	// casos de split
 	// pai null
 	if(pagSplitar->pai == NULL){
-		puts("pai null");
+		//puts("pai null");
+		
+		// nPag vai ser a nova pagina, um nivel acima do atual
+		// fazer verificacao se nao estoura o limite de nPag apos a insercao de nWord na nPag
 		TpPagina *nPag = novaPag();
 		arv->raiz = nPag;
 		nPag->palavras = (TpListaWord*) malloc(sizeof(TpListaWord));
+		
 		if(nPag->palavras != NULL){
 			nPag->palavras->first = nWord;
 			nPag->palavras->last = nWord;
@@ -279,7 +210,11 @@ void split(TpTree *arv, TpPagina *pagSplitar, int ordemArvore){
 			nPagDir->palavras = (TpListaWord*) malloc(sizeof(TpListaWord));
 			nPagDir->palavras->first = wSplit;
 			nPagDir->palavras->nItens = ordemArvore + 1;
-			nPagDir->folha = TRUE;	
+			if(folha){
+				nPagDir->folha = TRUE;	
+			}else{
+				nPagDir->folha = FALSE;
+			}
 			
 			TpWord *atual = nPagDir->palavras->first;
 			while(atual != NULL){
@@ -294,7 +229,11 @@ void split(TpTree *arv, TpPagina *pagSplitar, int ordemArvore){
 			pagSplitar->palavras->last = wSplit->ant;
 			pagSplitar->palavras->nItens = ordemArvore;
 			pagSplitar->irmaoD = nPagDir;
-			pagSplitar->folha = TRUE;
+			if(folha){
+				pagSplitar->folha = TRUE;
+			}else{
+				pagSplitar->folha = FALSE;
+			}
 			arv->folhaE = pagSplitar;
 			wSplit->ant->prox = NULL; /* o proximo doanterior ao wSplit ( que agora é o ultimo da lista) aponta para NULL
 										* separando a lista da pagina SPLIT
@@ -311,11 +250,18 @@ void split(TpTree *arv, TpPagina *pagSplitar, int ordemArvore){
 			nPagDir->palavras->last = aux;				
 			
 			// a pagina a ser splitada vai ficar sempre sendo a pagina a direita do split
-			// entao criar nova pagina para ser o filho a esquerda do split					
+			// entao criar nova pagina para ser o filho a esquerda do split	
+			
+			// chama o split pro nPag caso a insercao de nWord estoure seu limite				
+			if(nPag->palavras->nItens > (2*ordemArvore)){
+				puts("SPLIT PAI");
+				split(arv, nPag, ordemArvore);
+			}	
 		}
-		puts("sai null");		
+		//puts("sai null");	
+		
 	}
-	// paginaSplit é filho esquerda
+	// paginaSplit é filho esquerda - menor que pai
 	else if(pagSplitar == pagSplitar->pai->filhoEsquerda){
 		// paginar a splitar é filho esquerdo do pai
 		if(pagSplitar->pai->ant == NULL){
@@ -331,9 +277,17 @@ void split(TpTree *arv, TpPagina *pagSplitar, int ordemArvore){
 			pagSplitar->pai = nWord;
 			pagSplitar->palavras->last = wSplit->ant;
 			pagSplitar->palavras->nItens = ordemArvore;
-			pagSplitar->folha = TRUE;
-			arv->folhaE = pagSplitar;
 			
+			if(folha){
+				pagSplitar->folha = TRUE;
+				//???arv->folhaE = pagSplitar;				
+			}else{
+				pagSplitar->folha = FALSE;
+			}
+			
+			
+			
+			//nPag vai ser a nova pagina do lado direito
 			TpPagina *nPag = novaPag();
 			nPag->palavras = novaListaWord();
 			if(nPag->palavras != NULL){
@@ -360,7 +314,11 @@ void split(TpTree *arv, TpPagina *pagSplitar, int ordemArvore){
 					atual->myPage = nPag;
 					atual = atual->prox; 
 				}
-				//nItens atualizar				
+						
+			}
+			if(nWord->myPage->palavras->nItens > (2*ordemArvore)){
+				puts("SPLIT PAI");
+				split(arv, nWord->myPage, ordemArvore);
 			}
 		}else if(pagSplitar->pai->ant != NULL){
 			// pagina Split é filho esquerdo e pai nao é FIRST
@@ -407,25 +365,108 @@ void split(TpTree *arv, TpPagina *pagSplitar, int ordemArvore){
 				}
 				
 								
+			}
+			if(nWord->myPage->palavras->nItens > (2*ordemArvore)){
+				puts("SPLIT PAI");
+				split(arv, nWord->myPage, ordemArvore);
 			}		
 		}
 	// paginaSplit é filho direita	
-	}else if(pagSplitar == pagSplitar->pai->filhoDireita){
-		puts("paginaSplit é filho direita");
+	}
+	// paginaSplit é filho a direita - maior que pai
+	else if(pagSplitar == pagSplitar->pai->filhoDireita){
+		//puts("paginaSplit é filho direita");
+			
+		nWord->myPage = pagSplitar->pai->myPage;
+		nWord->ant = pagSplitar->pai;
+		pagSplitar->pai->prox = nWord;
+		nWord->filhoEsquerda = pagSplitar;
+		
+		pagSplitar->pai->filhoDireita = NULL;
+		pagSplitar->pai = nWord;
+		
+		nWord->myPage->palavras->last = nWord;
+		nWord->myPage->palavras->nItens++;
+		pagSplitar->palavras->nItens = ordemArvore;
+		
+		
+		// filho esquerdo da palavra Split agora é a primeira parte do filho direito do pai
+		// e o filho direito da palavra split é a segunda parte do filho direito do pai
+		
+		TpPagina *nPag = novaPag();
+		nPag->palavras = novaListaWord();
+		if(nPag->palavras != NULL){
+			nPag->palavras->first = wSplit;
+			nPag->pai = nWord;
+			
+			nWord->filhoDireita = nPag;
+			nPag->palavras->nItens = ordemArvore + 1;
+			
+			wSplit->ant->prox = NULL;
+			wSplit->ant = NULL; 
+			nPag->folha = TRUE;
+			TpWord *aux = nPag->palavras->first;
+			while(aux->prox != NULL){
+				aux = aux->prox;
+			}
+			nPag->palavras->last = aux;	
+			pagSplitar->irmaoD = nPag;
+			nPag->irmaoD = NULL;
+			TpWord *atual = nPag->palavras->first;
+			while(atual != NULL){
+				atual->myPage = nPag;
+				atual = atual->prox; 
+			}
+			//nItens atualizar				
+		}
+		if(nWord->myPage->palavras->nItens > (2*ordemArvore)){
+			puts("SPLIT PAI");
+			split(arv, nWord->myPage, ordemArvore);
+		}
 	}
 	// pai last
 	// pai meio
-	puts("FIM S");
+	//puts("FIM S");
 }
 
 
+void imprimeArvore(TpPagina *raiz){
+	
+	TpPagina *atual = raiz;
+	TpWord *aux = atual->palavras->first;
+	while(atual != NULL){
+		TpWord *pal = atual->palavras->first;
+		while(pal != NULL){
+			printf("[%s]", pal->word);
+			pal = pal->prox;
+		}
+		
+		if(aux->prox != NULL){
+			atual = aux->prox->filhoEsquerda;
+			aux = aux->prox;
+		}
+		
+	}
+	
 
-void imprimePaginas(TpTree *arv){
+}
+
+void imprimePaginas(TpTree *arv, TpPagina *folhaE){
 	//puts("imprimeeeee");
-	TpPagina *lista = arv->folhaE;
+	TpPagina *lista = folhaE;
+	
 	while(lista != NULL){
 		TpWord *palavra = lista->palavras->first;
 		//printf("\t\tPAAAAI first[%s]", lista->pai->word);
+		
+		
+		printf(" {");
+		printf("(%d)", lista->palavras->nItens);
+		while(palavra != NULL){
+			printf("[%s]", palavra->word);
+			palavra = palavra->prox;
+		}
+		printf("} ");
 		
 		if(lista->pai != NULL){
 			//puts("pai");
@@ -434,23 +475,18 @@ void imprimePaginas(TpTree *arv){
 				if(lista->pai->myPage->palavras != NULL){
 					//puts("palavras");
 					if(lista->pai->myPage->palavras->first != NULL){
-						//puts("first");
-						printf("PAAAAI FIRST[%s]", lista->pai->word);
+						printf("pai -->");
+						imprimePaginas(arv,lista->pai->myPage);
+						puts("");
+					//	printf("PAI[%s]", lista->pai->word);
 					}
 				}
 			}
 		}
 		
-		/*if(lista->pai != NULL  && lista->pai->myPage != NULL && lista->pai->myPage->palavras->first != NULL){
-			printf("\t\tPAAAAI FIRST[%s]", lista->pai->myPage->palavras->first->word);
-		}*/
-		printf(" |");
-		printf("/[%d]\\", lista->palavras->nItens);
-		while(palavra != NULL){
-			printf("[%s]", palavra->word);
-			palavra = palavra->prox;
-		}
-		printf("| \n");
+		
+		
+		
 		lista = lista->irmaoD;
 	}
 	//puts("fim IMPRIMIR");

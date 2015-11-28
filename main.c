@@ -26,7 +26,7 @@ int main(int argc, char **argv){
 	insereWord(arv, arv->raiz, "neverends", M);
 	*/
 	
-	insereWord(arv, arv->raiz, "ja", M);
+	/*insereWord(arv, arv->raiz, "ja", M);
 	insereWord(arv, arv->raiz, "ba", M);
 	insereWord(arv, arv->raiz, "ra", M);
 	insereWord(arv, arv->raiz, "ta", M);
@@ -55,10 +55,115 @@ int main(int argc, char **argv){
 	insereWord(arv, arv->raiz, "eoq", M);
 	insereWord(arv, arv->raiz, "ej", M);
 	insereWord(arv, arv->raiz, "easease", M);
+	*/
+	
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "a", M);
+	insereWord(arv, arv->raiz, "b", M);
+	insereWord(arv, arv->raiz, "b", M);
+	insereWord(arv, arv->raiz, "c", M);
+	insereWord(arv, arv->raiz, "c", M);
+	insereWord(arv, arv->raiz, "d", M);
+	insereWord(arv, arv->raiz, "d", M);
+	insereWord(arv, arv->raiz, "e", M);
+	insereWord(arv, arv->raiz, "e", M);
+	insereWord(arv, arv->raiz, "f", M);
+	insereWord(arv, arv->raiz, "f", M);
+	insereWord(arv, arv->raiz, "g", M);
+	insereWord(arv, arv->raiz, "g", M);
+	insereWord(arv, arv->raiz, "h", M);
+	insereWord(arv, arv->raiz, "h", M);
+	insereWord(arv, arv->raiz, "i", M);
+	insereWord(arv, arv->raiz, "i", M);
+	insereWord(arv, arv->raiz, "j", M);
+	insereWord(arv, arv->raiz, "j", M);
+	insereWord(arv, arv->raiz, "k", M);
+	insereWord(arv, arv->raiz, "k", M);
+	insereWord(arv, arv->raiz, "l", M);
+	insereWord(arv, arv->raiz, "l", M);
+	insereWord(arv, arv->raiz, "m", M);
+	insereWord(arv, arv->raiz, "m", M);
+	insereWord(arv, arv->raiz, "n", M);
+	insereWord(arv, arv->raiz, "n", M);
+	insereWord(arv, arv->raiz, "o", M);
+	insereWord(arv, arv->raiz, "o", M);
+	insereWord(arv, arv->raiz, "p", M);
+	insereWord(arv, arv->raiz, "p", M);
+	insereWord(arv, arv->raiz, "q", M);
+	insereWord(arv, arv->raiz, "q", M);
+	insereWord(arv, arv->raiz, "r", M);
+	insereWord(arv, arv->raiz, "r", M);
+	insereWord(arv, arv->raiz, "s", M);
+	insereWord(arv, arv->raiz, "s", M);
+	insereWord(arv, arv->raiz, "t", M);
+	insereWord(arv, arv->raiz, "t", M);
+	insereWord(arv, arv->raiz, "u", M);
+	insereWord(arv, arv->raiz, "u", M);
+	insereWord(arv, arv->raiz, "v", M);
+	insereWord(arv, arv->raiz, "v", M);
+	insereWord(arv, arv->raiz, "w", M);
+	insereWord(arv, arv->raiz, "w", M);
+	insereWord(arv, arv->raiz, "x", M);
+	insereWord(arv, arv->raiz, "x", M);
+	insereWord(arv, arv->raiz, "y", M);
+	insereWord(arv, arv->raiz, "y", M);
+	insereWord(arv, arv->raiz, "z", M);
+	insereWord(arv, arv->raiz, "z", M);
 	
 	
-	imprimePaginas(arv);
+	imprimePaginas(arv, arv->folhaE);
 	//printf("\nRAIZ[%s] end[%p]\n", arv->raiz->palavras->first->word, arv->raiz);
+	//printf("\nRAIZ[%s] end[%p]\n", arv->raiz->palavras->first->word, arv->raiz);
+	//printf("\nRAIZ[%s] end[%p]\n", arv->raiz->palavras->first->word, arv->raiz);
+	//printf("\nRAIZ[%s] end[%p]\n", arv->raiz->palavras->first->word, arv->raiz);
+	//printf("\nRAIZ[%s] end[%p]\n", arv->raiz->palavras->first->word, arv->raiz);
+	
+	
 	
 	
 	
@@ -68,3 +173,8 @@ int main(int argc, char **argv){
 	
 	return 0;
 }
+
+
+
+
+
