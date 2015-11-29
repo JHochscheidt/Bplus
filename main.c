@@ -1,6 +1,7 @@
 #include "bpluslib.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 
 /*
@@ -36,7 +37,9 @@ int main(int argc, char **argv){
 				if(campo == arg1){// copiar os n(param) caracter aq strncpy() 
 					reg = malloc(sizeof(char)* (arg2+1));
 					strncpy(reg, pch, arg2);
+					printf("[%s]\n",reg);
 					insereWord(arv, arv->raiz, reg, M);
+					imprimePaginas(arv, arv->folhaE);
 				}
 				if(pch[0] == ' '){
 					
