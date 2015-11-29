@@ -36,12 +36,9 @@ int main(int argc, char **argv){
 			campo = 1;
 			do{
 				if(campo == arg1){// copiar os n(param) caracter aq strncpy() 
-					if(arg2 < (int)(strlen(pch)-1)){
-						reg = malloc(sizeof(char)*(arg2+1));
-						strncpy(reg, pch, arg2);
-						insereWord(arv, arv->raiz, pch, M);
-					}else//pch é menor doq o tamanho de caracterres à serem indexados
-						insereWord(arv, arv->raiz, pch, M);
+					reg = malloc(sizeof(char)* (arg2+1));
+					strncpy(reg, pch, arg2);
+					insereWord(arv, arv->raiz, reg, M);
 				}
 				if(pch[0] == ' '){
 					
