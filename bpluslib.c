@@ -1,10 +1,10 @@
 #include "bpluslib.h"
 
 TpPagina *insereWord(TpTree *arv, TpPagina *raiz, char *word, int ordemArvore){
-	//puts("INS");
+	puts("INS");
 	//arvore vazia
 	if(arv->raiz == NULL){
-		//puts("INSERCAO ARVORE VAZIA"); 
+		puts("INSERCAO ARVORE VAZIA"); 
 		arv->raiz = novaPag();
 		if(arv->raiz != NULL){
 			arv->raiz->folha = TRUE;
@@ -37,12 +37,14 @@ TpPagina *insereWord(TpTree *arv, TpPagina *raiz, char *word, int ordemArvore){
 	
 	// caso a arvore ja exista
 	else{ // arvore ja existe
-		//puts("INSERCAO NORMAL");
+		puts("INSERCAO NORMAL");
 		TpPagina *aux = arv->raiz;
+		puts("aqui");
 		int cmp = 0;
 		//int cmp2 = 0;
 		// desce na arvore ate achar o lugar na folha
 		while(!aux->folha){
+			puts("while");
 			// comparar com o ultimo elemento da lista
 				// se for maior ja desce
 			cmp = strcmp(word, aux->palavras->last->word);
@@ -57,6 +59,7 @@ TpPagina *insereWord(TpTree *arv, TpPagina *raiz, char *word, int ordemArvore){
 				TpWord *auxLista = aux->palavras->first;
 				int cmpLista = 0;
 				while(auxLista != NULL){
+					puts("auxLista");
 					cmpLista = strcmp(word, auxLista->word);
 					if(cmpLista < 0){
 						// desce pra proxima pagina a esquerda
@@ -66,6 +69,7 @@ TpPagina *insereWord(TpTree *arv, TpPagina *raiz, char *word, int ordemArvore){
 						auxLista = auxLista->prox;
 					}else if(auxLista->prox == NULL){
 						aux = auxLista->filhoDireita;
+						puts("filha direita");
 						break;
 						// talvez essa verificacao ja nao seja necessaria
 						//pois acima ja esta verificando se a WORD é maior que a ultima palavra da lista.
@@ -73,16 +77,17 @@ TpPagina *insereWord(TpTree *arv, TpPagina *raiz, char *word, int ordemArvore){
 						// de qualquer forma, se chegou aqui deve-se alocar uma nova pagina
 					}
 				} // fim do while que percorre a lista da pagina
-			  
+				puts("fim auxLista");
 			}
 			// falta fazer o incremento do AUX para descer na arvore
 		} // fim do while que percorre a arvore
-		
+		puts("aux NULL");
+		puts("fim while");
 		// aux é folha
 		//verificar o tamanho atual da pagina folha
 		//encontrar o lugar da nova WORD na pagina
 		if(aux->palavras->nItens <= (2*ordemArvore)){
-			//puts("FOLHA"); 
+			puts("FOLHA"); 
 			/*aux->palavras->nItens <= (2*ordemArvore)
 			 *permite que se insira uma palavra a mais do que o tamanho permitido para a pagina
 			 *e ai faz o split caso estoure o limite
@@ -171,7 +176,7 @@ TpPagina *insereWord(TpTree *arv, TpPagina *raiz, char *word, int ordemArvore){
 			// ou verificar se um irmao tem disponibilidade de receber um nodo ROTACAO :XXXXXX
 		}
 	}
-	//puts("FIM INSERRRRRRRRRRRRRRRRRRRRRR");	
+	puts("FIM INSERRRRRRRRRRRRRRRRRRRRRR");	
 	return NULL;
 }
 
@@ -191,7 +196,7 @@ void splitFolha(TpTree *arv, TpPagina *pagSplitar, int ordemArvore){
 	// casos de split
 	// pai null
 	if(pagSplitar->pai == NULL){
-		//puts("pai null");
+		puts("pai null");
 		
 		// nPag vai ser a nova pagina, um nivel acima do atual
 		// fazer verificacao se nao estoura o limite de nPag apos a insercao de nWord na nPag
@@ -253,8 +258,10 @@ void splitFolha(TpTree *arv, TpPagina *pagSplitar, int ordemArvore){
 	}
 	// paginaSplit é filho esquerda - menor que pai
 	else if(pagSplitar == pagSplitar->pai->filhoEsquerda){
+		puts("pai filho esquerdo");
 		// paginar a splitar é filho esquerdo do pai
 		if(pagSplitar->pai->ant == NULL){
+			puts("pai é first");
 			// pai é o FIRST
 			nWord->myPage = pagSplitar->pai->myPage;
 			
@@ -323,6 +330,7 @@ void splitFolha(TpTree *arv, TpPagina *pagSplitar, int ordemArvore){
 				splitNaoFolha(arv, nWord->myPage, ordemArvore);
 			}
 		}else if(pagSplitar->pai->ant != NULL){
+			puts("pai NAAAAAAAAAAAAO é first");
 			// pagina Split é filho esquerdo e pai nao é FIRST
 			nWord->myPage = pagSplitar->pai->myPage;
 			
@@ -377,7 +385,7 @@ void splitFolha(TpTree *arv, TpPagina *pagSplitar, int ordemArvore){
 	}
 	// paginaSplit é filho a direita - maior que pai
 	else if(pagSplitar == pagSplitar->pai->filhoDireita){
-		//puts("paginaSplit é filho direita");
+		puts("paginaSplit é filho direita");
 			
 		nWord->myPage = pagSplitar->pai->myPage;
 		nWord->ant = pagSplitar->pai;
