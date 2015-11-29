@@ -4,6 +4,7 @@
 #include <string.h>
 #define TRUE 1
 #define FALSE 0
+#define bool char
 // #define M atoi(argv[1])// ordem da arvore
 
 typedef struct tp_pag{
@@ -48,8 +49,8 @@ typedef struct tp_tree{
 
 TpPagina *insereWord(TpTree *arv, TpPagina *raiz, char *word, int ordemArvore);
 
-void split(TpTree *arv,TpPagina *pagSplitar, int ordemArvore);
-
+void splitFolha(TpTree *arv,TpPagina *pagSplitar, int ordemArvore);
+void splitNaoFolha(TpTree *arv, TpPagina *pagSplitar, int ordemArvore);
 
 TpPagina *novaPag(); // cria uma nova pagina
 TpListaWord *novaListaWord(); // cria uma lista de palavras "vetor de palavras dentro da pagina"
